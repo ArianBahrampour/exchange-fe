@@ -1,22 +1,25 @@
-import { styled } from "@mui/material";
+import { Card, CardContent, CardHeader, Divider, Typography, styled } from "@mui/material";
 import React from "react";
-import famAd from "../../assets/images/fam_ad.gif";
 
-const Container = styled("div")(({ theme }) => ({
-    background: `url(${famAd})`,
-    backgroundSize: "contain",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    width: "100%",
-    height: "auto",
-    minHeight: "70px",
+const StyledCard = styled(Card)(({ theme }) => ({
+    boxShadow:
+        "0px 3px 6px 0px rgba(24,26,32,0.08), 0px 7px 14px 0px rgba(71,77,87,0.08), 0px 0px 1px 0px rgba(24,26,32,0.1);",
 }));
 
-const LandingCard: React.FC = () => {
+type LandingCardProps = {
+    children?: React.ReactNode;
+    title?: string;
+};
+
+const LandingCard: React.FC<LandingCardProps> = ({ title, children }) => {
     return (
-        <a target="_blank" href="https://fampayment.com/" rel="noreferrer">
-            <Container></Container>
-        </a>
+        <StyledCard>
+            <CardContent>
+                <Typography>{title}</Typography>
+                <Divider flexItem />
+                {children}
+            </CardContent>
+        </StyledCard>
     );
 };
 

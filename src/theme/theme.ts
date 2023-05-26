@@ -16,22 +16,37 @@ const theme = () =>
                 fontSize: "0.875rem",
             },
         },
+        shape: {
+            borderRadius: 8,
+        },
         palette: {
             mode: "dark",
             primary: {
-                main: "rgb(252, 213, 53)",
+                main: "#FCD535",
             },
             secondary: {
-                main: "rgb(252, 213, 53)",
+                main: "#FCD535",
             },
             text: {
-                primary: "#fff",
-                secondary: "#D31F52",
+                primary: "#1E2329",
+                secondary: "#1E2329",
                 disabled: "#616161",
             },
             background: {
-                default: "#181A20",
-                paper: "#181A20",
+                default: "#F5F5F5",
+                paper: "#FFFFFF",
+            },
+        },
+        components: {
+            MuiOutlinedInput: {
+                styleOverrides: {
+                    root: {
+                        borderColor: "#EAECEF",
+                    },
+                    input: {
+                        borderColor: "#EAECEF",
+                    },
+                },
             },
         },
     });
