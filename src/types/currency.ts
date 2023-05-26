@@ -1,6 +1,7 @@
 export type Currency = {
     id: number;
     symbol: string;
+    name: string;
     icon?: string;
 };
 
@@ -21,13 +22,16 @@ export const CURRENCIES: {
     USD: {
         id: 1,
         symbol: "$",
+        name: "USD",
     },
     EUR: {
         id: 2,
         symbol: "€",
+        name: "EUR",
     },
     GBP: {
         id: 3,
         symbol: "£",
+        name: "GBP",
     },
 };

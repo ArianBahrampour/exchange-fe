@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BalanceContext } from "../context/BalanceContext";
+import { BalanceContext } from "../../context/BalanceContext";
 import { Typography } from "@mui/material";
 
 const BalanceSummary: React.FC = () => {
