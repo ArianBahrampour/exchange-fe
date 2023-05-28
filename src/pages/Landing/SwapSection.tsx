@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Grid, Typography } from "@mui/material";
 
 import SwapVertIcon from "@mui/icons-material/SwapVert";
@@ -43,7 +43,7 @@ const SwapSection = () => {
                 <SwapVertIcon sx={{ fontSize: "2.5rem" }} />
                 <Typography variant="body1" fontWeight={600} color="GrayText">
                     {CURRENCIES[fromCurrency].symbol}1 = {CURRENCIES[toCurrency].symbol}
-                    {(rates[toCurrency] ?? 1 / rates[fromCurrency] ?? 1).toPrecision(3)}
+                    {((rates[toCurrency] ?? 1) / (rates[fromCurrency] ?? 1)).toPrecision(3)}
                 </Typography>
             </CenterWrapper>
             <CurrencySelect
@@ -69,7 +69,11 @@ const SwapSection = () => {
             )}
             <PrimaryButton
                 sx={{ mt: "auto", width: "100%" }}
-                onClick={() => convertTwoCurrency(fromCurrency, toCurrency, fromAmount ?? 0)}
+                onClick={() => {
+                    convertTwoCurrency(fromCurrency, toCurrency, fromAmount ?? 0);
+                    setFromAmount(undefined);
+                    setToAmount(undefined);
+                }}
                 disabled={
                     fromAmount === 0 ||
                     fromAmount === undefined ||
