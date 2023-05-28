@@ -1,23 +1,39 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { Input } from "@mui/material";
-import { CURRENCIES, SUPPORTED_CURRENCIES } from "../types/currency";
+import { Input, InputProps } from "@mui/material";
+import Select from "@mui/material/Select";
 
-const CurrencySelect = () => {
-    const [age, setAge] = React.useState("");
+import { CURRENCIES, SUPPORTED_CURRENCIES } from "../../types/currency";
+import { FC } from "react";
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value as string);
-    };
+export type CurrencySelectProps = {
+    title: string;
+    amount?: number;
+    inputProps?: InputProps;
+    currency: SUPPORTED_CURRENCIES;
+    onCurrencyChange: (currency: SUPPORTED_CURRENCIES) => void;
+    onAmountChange: (amount?: number) => void;
+};
 
+const CurrencySelect: FC<CurrencySelectProps> = ({
+    title,
+    amount,
+    currency,
+    onCurrencyChange,
+    onAmountChange,
+    inputProps,
+}) => {
     return (
         <Box sx={{ minWidth: 120 }}>
-            <InputLabel>From</InputLabel>
-            <Input />
-            <Select value={age} onChange={handleChange}>
+            <InputLabel>{title}</InputLabel>
+            <Input
+                type="number"
+                value={amount}
+                onChange={(e) => onAmountChange(parseFloat(e.target.value))}
+                {...inputProps}
+            />
+            <Select value={currency} onChange={(e) => onCurrencyChange(e.target.value as SUPPORTED_CURRENCIES)}>
                 {Object.keys(CURRENCIES).map((currency) => {
                     return <MenuItem value={currency}>{CURRENCIES[currency as SUPPORTED_CURRENCIES].symbol}</MenuItem>;
                 })}
