@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Coin Exchange
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple coin exchange app that allows users to exchange coins for other coins. The app is built using React.
+Demo: https://arianbahrampour.github.io/exchange-fe/
 
 ## Available Scripts
 
