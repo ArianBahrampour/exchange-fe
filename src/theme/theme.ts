@@ -23,13 +23,14 @@ const theme = () =>
             mode: "dark",
             primary: {
                 main: "#FCD535",
+                light: "#474d5724",
             },
             secondary: {
                 main: "#FCD535",
             },
             text: {
                 primary: "#1E2329",
-                secondary: "#1E2329",
+                secondary: "#474D57",
                 disabled: "#616161",
             },
             background: {
@@ -38,13 +39,17 @@ const theme = () =>
             },
         },
         components: {
-            MuiOutlinedInput: {
+            MuiInputBase: {
                 styleOverrides: {
                     root: {
-                        borderColor: "#EAECEF",
+                        borderBottom: "1px solid #E0E0E0",
                     },
-                    input: {
-                        borderColor: "#EAECEF",
+                },
+            },
+            MuiSvgIcon: {
+                styleOverrides: {
+                    root: {
+                        color: "#474D57 !important",
                     },
                 },
             },

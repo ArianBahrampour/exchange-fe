@@ -18,7 +18,7 @@ const LandingPage = () => {
             sx={{ minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}
         >
             <LandingCard title="Currency Exchange🚀">
-                <Grid container spacing={5}>
+                <Grid container spacing={6}>
                     <SwapSection />
                     {/* <Divider orientation="vertical" flexItem /> */}
                     <Grid item xs={12} md={6}>

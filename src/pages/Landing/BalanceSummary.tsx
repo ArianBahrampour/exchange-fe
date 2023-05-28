@@ -7,11 +7,16 @@ const BalanceSummary: React.FC = () => {
 
     return (
         <div>
+            <Typography variant="h6" fontWeight={600}>
+                Wallet Balance
+            </Typography>
             {balanceCtx?.balances?.map((balance) => {
                 return (
                     <div>
-                        <Typography>{balance.currency.symbol}</Typography>
-                        <Typography>{balance.balance}</Typography>
+                        <Typography color="GrayText">
+                            <span style={{ marginRight: "2px" }}>{balance.currency.symbol}</span>
+                            {balance.balance.toFixed(2)}
+                        </Typography>
                     </div>
                 );
             })}

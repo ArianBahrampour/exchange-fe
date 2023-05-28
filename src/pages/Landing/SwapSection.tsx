@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 
 import { BalanceContext } from "../../context/BalanceContext";
 import CurrencySelect from "../../components/inputs/CurrencySelect";
-import { SUPPORTED_CURRENCIES } from "../../types/currency";
+import { CURRENCIES, SUPPORTED_CURRENCIES } from "../../types/currency";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
+import CenterWrapper from "../../components/wrappers/CenterWrapper";
 const SwapSection = () => {
-    const { fetchExchangeRates, convertTwoCurrency, rates } = useContext(BalanceContext);
+    const { fetchExchangeRates, convertTwoCurrency, rates, balances } = useContext(BalanceContext);
     const [fromCurrency, setFromCurrency] = useState<SUPPORTED_CURRENCIES>(SUPPORTED_CURRENCIES.USD);
     const [toCurrency, setToCurrency] = useState<SUPPORTED_CURRENCIES>(SUPPORTED_CURRENCIES.EUR);
     const [fromAmount, setFromAmount] = useState<number | undefined>(undefined);
@@ -17,6 +18,8 @@ const SwapSection = () => {
     useEffect(() => {
         fetchExchangeRates();
     }, [fetchExchangeRates]);
+
+    let firstSelectError = balances.find((balance) => balance.currency.name === fromCurrency)?.balance! < fromAmount!;
 
     return (
         <Grid item xs={12} md={6}>
@@ -32,10 +35,22 @@ const SwapSection = () => {
                 }}
                 currency={fromCurrency}
                 amount={fromAmount}
+                inputProps={{
+                    startAdornment: <span style={{ fontSize: "1.5rem" }}>-</span>,
+                }}
+                formControlProps={{
+                    error: firstSelectError,
+                }}
             />
-            <SwapVertIcon />
+            <CenterWrapper>
+                <SwapVertIcon sx={{ fontSize: "2.5rem" }} />
+                <Typography variant="body1" fontWeight={600} color="GrayText">
+                    {CURRENCIES[fromCurrency].symbol}1 = {CURRENCIES[toCurrency].symbol}
+                    {(rates[toCurrency] / rates[fromCurrency]).toPrecision(3)}
+                </Typography>
+            </CenterWrapper>
             <CurrencySelect
-                title="to"
+                title="To"
                 onCurrencyChange={(currency) => {
                     setToCurrency(currency);
                     setToAmount((rates[toCurrency] / rates[fromCurrency]) * fromAmount!);
@@ -46,11 +61,25 @@ const SwapSection = () => {
                 }}
                 currency={toCurrency}
                 amount={toAmount}
+                inputProps={{
+                    startAdornment: <span style={{ fontSize: "1.5rem" }}>+</span>,
+                }}
             />
-
+            {firstSelectError && (
+                <Typography variant="caption" color="error">
+                    Insufficient balance
+                </Typography>
+            )}
             <PrimaryButton
-                sx={{ mt: "auto" }}
+                sx={{ mt: "auto", width: "100%" }}
                 onClick={() => convertTwoCurrency(fromCurrency, toCurrency, fromAmount ?? 0)}
+                disabled={
+                    fromAmount === 0 ||
+                    fromAmount === undefined ||
+                    toAmount === 0 ||
+                    toAmount === undefined ||
+                    firstSelectError
+                }
             >
                 Exchange
             </PrimaryButton>

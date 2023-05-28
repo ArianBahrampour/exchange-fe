@@ -69,7 +69,7 @@ export const BalanceProvider: React.FC<{ children: ReactNode }> = ({ children })
         const fromBalance = balances.find((balance) => balance.currency.name === fromCurrency.name)?.balance!;
         const toBalance = balances.find((balance) => balance.currency.name === toCurrency.name)?.balance!;
 
-        const result = (amount * fromRate) / toRate;
+        const result = (amount * toRate) / fromRate;
 
         updateBalance(from, fromBalance - amount);
         updateBalance(to, toBalance + result);
