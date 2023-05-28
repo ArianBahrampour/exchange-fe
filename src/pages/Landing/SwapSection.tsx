@@ -10,15 +10,11 @@ import PrimaryButton from "../../components/buttons/PrimaryButton";
 import CenterWrapper from "../../components/wrappers/CenterWrapper";
 
 const SwapSection = () => {
-    const { fetchExchangeRates, convertTwoCurrency, rates, balances } = useContext(BalanceContext);
+    const { convertTwoCurrency, rates, balances } = useContext(BalanceContext);
     const [fromCurrency, setFromCurrency] = useState<SUPPORTED_CURRENCIES>(SUPPORTED_CURRENCIES.USD);
     const [toCurrency, setToCurrency] = useState<SUPPORTED_CURRENCIES>(SUPPORTED_CURRENCIES.EUR);
     const [fromAmount, setFromAmount] = useState<number | undefined>(undefined);
     const [toAmount, setToAmount] = useState<number | undefined>(undefined);
-
-    useEffect(() => {
-        fetchExchangeRates();
-    }, [fetchExchangeRates]);
 
     let firstSelectError = balances.find((balance) => balance.currency.name === fromCurrency)?.balance! < fromAmount!;
 
@@ -47,7 +43,7 @@ const SwapSection = () => {
                 <SwapVertIcon sx={{ fontSize: "2.5rem" }} />
                 <Typography variant="body1" fontWeight={600} color="GrayText">
                     {CURRENCIES[fromCurrency].symbol}1 = {CURRENCIES[toCurrency].symbol}
-                    {(rates[toCurrency] / rates[fromCurrency]).toPrecision(3)}
+                    {(rates[toCurrency] ?? 1 / rates[fromCurrency] ?? 1).toPrecision(3)}
                 </Typography>
             </CenterWrapper>
             <CurrencySelect

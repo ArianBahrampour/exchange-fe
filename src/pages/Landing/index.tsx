@@ -10,7 +10,7 @@ const LandingPage = () => {
 
     useEffect(() => {
         fetchExchangeRates();
-    }, [fetchExchangeRates]);
+    }, []);
 
     return (
         <Container

@@ -57,7 +57,6 @@ export const BalanceProvider: React.FC<{ children: ReactNode }> = ({ children })
                 setRates(rates);
             })
             .catch((error) => {
-                console.log(error);
                 setRates(DEFAULT_RATES);
             });
     };

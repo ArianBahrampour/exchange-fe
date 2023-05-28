@@ -16,12 +16,10 @@ export const getExchangeRates = async (): Promise<ExchangeRates> => {
         `http://api.exchangeratesapi.io/v1/latest?access_key=${apiKey}&symbols=GBP,JPY,EUR,USD`
     );
 
-    console.log(response);
-
     if (response.status !== 200) {
         throw new Error("Error fetching exchange rates");
     }
 
     const data = await response.json();
-    return data?.data?.rates;
+    return data?.rates;
 };
