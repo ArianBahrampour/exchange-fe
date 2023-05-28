@@ -8,6 +8,7 @@ import CurrencySelect from "../../components/inputs/CurrencySelect";
 import { CURRENCIES, SUPPORTED_CURRENCIES } from "../../types/currency";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import CenterWrapper from "../../components/wrappers/CenterWrapper";
+
 const SwapSection = () => {
     const { fetchExchangeRates, convertTwoCurrency, rates, balances } = useContext(BalanceContext);
     const [fromCurrency, setFromCurrency] = useState<SUPPORTED_CURRENCIES>(SUPPORTED_CURRENCIES.USD);

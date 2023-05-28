@@ -48,6 +48,7 @@ const CurrencySelect: FC<CurrencySelectProps> = ({
                 <div style={{ width: "80%", paddingTop: "20px" }}>
                     <Input
                         type="number"
+                        data-test-id="currency-input"
                         value={amount ? getFixedPrecisionValue(amount) : ""}
                         onChange={(e) => onAmountChange(e.target.value !== "" ? parseFloat(e.target.value) : undefined)}
                         {...inputProps}
@@ -59,9 +60,9 @@ const CurrencySelect: FC<CurrencySelectProps> = ({
                         variant="standard"
                         onChange={(e) => onCurrencyChange(e.target.value as SUPPORTED_CURRENCIES)}
                     >
-                        {Object.keys(CURRENCIES).map((currency) => {
+                        {Object.keys(CURRENCIES).map((currency, index) => {
                             return (
-                                <MenuItem value={currency}>
+                                <MenuItem key={index} value={currency}>
                                     {CURRENCIES[currency as SUPPORTED_CURRENCIES].symbol}
                                 </MenuItem>
                             );

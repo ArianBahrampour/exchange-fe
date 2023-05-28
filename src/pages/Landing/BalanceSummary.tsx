@@ -10,14 +10,12 @@ const BalanceSummary: React.FC = () => {
             <Typography variant="h6" fontWeight={600}>
                 Wallet Balance
             </Typography>
-            {balanceCtx?.balances?.map((balance) => {
+            {balanceCtx?.balances?.map((balance, index) => {
                 return (
-                    <div>
-                        <Typography color="GrayText">
-                            <span style={{ marginRight: "2px" }}>{balance.currency.symbol}</span>
-                            {balance.balance.toFixed(2)}
-                        </Typography>
-                    </div>
+                    <Typography color="GrayText" key={index}>
+                        <span style={{ marginRight: "2px" }}>{balance.currency.symbol}</span>
+                        {balance.balance.toFixed(2)}
+                    </Typography>
                 );
             })}
         </div>

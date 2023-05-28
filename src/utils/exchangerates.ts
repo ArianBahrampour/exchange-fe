@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export type ExchangeRates = {
     [key: string]: number;
 };
@@ -14,12 +12,16 @@ export const DEFAULT_RATES: ExchangeRates = {
 export const getExchangeRates = async (): Promise<ExchangeRates> => {
     const apiKey = process.env.REACT_APP_EXCHANGE_RATES_API_KEY;
 
-    const response = await axios.get(
+    const response = await fetch(
         `http://api.exchangeratesapi.io/v1/latest?access_key=${apiKey}&symbols=GBP,JPY,EUR,USD`
     );
+
+    console.log(response);
 
     if (response.status !== 200) {
         throw new Error("Error fetching exchange rates");
     }
-    return response?.data?.rates;
+
+    const data = await response.json();
+    return data?.data?.rates;
 };
